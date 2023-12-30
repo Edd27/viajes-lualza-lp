@@ -1,8 +1,11 @@
 import useSiteData from "@/store/site";
 import { ModeToggle } from "./mode-toggle";
+import { ISite } from "@/type";
 
 export default function Header() {
-  const { site } = useSiteData();
+  const { site } = useSiteData() as {
+    site: ISite;
+  };
 
   return (
     <header>

@@ -2,12 +2,10 @@ import { useRef, type ReactNode } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { cn } from "@/lib/utils";
 import { Carousel, CarouselContent, CarouselItem } from "./ui/carousel";
+import { IImage } from "@/type";
 
 type SectionProps = {
-  carouselImages?: {
-    id: string;
-    url: string;
-  }[];
+  carouselImages?: IImage[];
   carouselDelay?: number;
   background?: string;
   verticalAlignment?: "start" | "center" | "end" | "between";
@@ -57,7 +55,7 @@ export default function Section({
             onMouseEnter={plugin.current.stop}
             onMouseLeave={plugin.current.reset}
           >
-            <CarouselContent className="min-h-screen">
+            <CarouselContent className="min-h-screen max-h-screen">
               {carouselImages.map((img) => (
                 <CarouselItem
                   key={img.id}

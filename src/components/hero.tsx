@@ -1,13 +1,23 @@
 import useSiteData from "@/store/site";
 import Section from "./section";
-import { ISection } from "@/type";
+import { ISection, ISite } from "@/type";
 
 export default function Hero() {
-  const { site } = useSiteData();
+  const { site } = useSiteData() as {
+    site: ISite;
+  };
 
   const heroSection =
     site?.sections?.find((section: ISection) => section?.name === "hero") ??
     null;
+
+  const renderContent = () => {
+    if (heroSection?.content?.toString()) {
+      return heroSection?.content?.toString();
+    } else {
+      return "Subtitulo";
+    }
+  };
 
   return (
     <Section
@@ -20,9 +30,7 @@ export default function Hero() {
       <h1 className="text-3xl lg:text-5xl font-bold mb-10">
         {heroSection?.title ?? "Hero"}
       </h1>
-      <h2 className="text-xl lg:text-3xl">
-        {heroSection?.content ?? "Subtitulo"}
-      </h2>
+      <h2 className="text-xl lg:text-3xl">{renderContent()}</h2>
     </Section>
   );
 }

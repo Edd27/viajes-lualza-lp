@@ -2,6 +2,8 @@ export interface ISection {
   name: string;
   title: string;
   content: IContactContent | string;
+  images?: IImage[];
+  background?: string;
 }
 
 export interface IContactContent {
@@ -28,4 +30,10 @@ export interface ISite {
   favicon: string;
   logo: string;
   sections: ISection[];
+}
+
+export interface IImage {
+  id: string;
+  url: string;
+  alt?: string;
 }

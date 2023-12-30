@@ -1,19 +1,20 @@
 import useSiteData from "@/store/site";
 import Section from "./section";
-import { ISection } from "@/type";
+import { ISection, ISite } from "@/type";
 
 export default function Contact() {
-  const { site } = useSiteData();
+  const { site } = useSiteData() as {
+    site: ISite;
+  };
 
-  const contactSection =
-    site?.sections?.find((section: ISection) => section?.name === "contact") ??
-    null;
+  const contactSection = site?.sections?.find(
+    (section: ISection) => section?.name === "contact"
+  ) as ISection | undefined;
 
-  const iframeMap = contactSection.content.map.replaceAll("\\'", '""') ?? "";
-
-  console.log(iframeMap);
-
-  console.log(contactSection.content.map);
+  const iframeMap =
+    typeof contactSection?.content === "string"
+      ? contactSection?.content.replace("\\'", '"')
+      : "";
 
   return (
     <Section verticalAlignment="center">

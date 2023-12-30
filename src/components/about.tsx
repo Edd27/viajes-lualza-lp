@@ -1,9 +1,11 @@
 import useSiteData from "@/store/site";
 import Section from "./section";
-import { ISection } from "@/type";
+import { ISection, ISite } from "@/type";
 
 export default function About() {
-  const { site } = useSiteData();
+  const { site } = useSiteData() as {
+    site: ISite;
+  };
 
   const aboutSection =
     site?.sections?.find((section: ISection) => section?.name === "about") ??
@@ -15,7 +17,8 @@ export default function About() {
         {aboutSection?.title ?? "Acerca de nosotros"}
       </h2>
       <p className="text-balance max-w-lg">
-        {aboutSection?.content ?? "Parrafo descriptivo de la empresa"}
+        {aboutSection?.content?.toString() ??
+          "Parrafo descriptivo de la empresa"}
       </p>
     </Section>
   );
