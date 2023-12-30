@@ -1,10 +1,9 @@
+import { ISite } from "@/type";
 import { create } from "zustand";
 
-const response = await fetch(`${import.meta.env.VITE_API_URL}/site`);
-const { data } = await response.json();
-
-const useSiteData = create(() => ({
-  site: data,
+const useSiteData = create((set) => ({
+  site: {} as ISite,
+  setSite: (site: ISite) => set({ site }),
 }));
 
 export default useSiteData;

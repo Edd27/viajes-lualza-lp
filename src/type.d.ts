@@ -21,3 +21,11 @@ export interface IAddress {
   state: string;
   country: string;
 }
+
+export interface ISite {
+  title: string;
+  description: string;
+  favicon: string;
+  logo: string;
+  sections: ISection[];
+}

@@ -2,18 +2,41 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Header from "./components/header";
 import Footer from "./components/footer";
 import useSiteData from "./store/site";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Hero from "./components/hero";
 import About from "./components/about";
 import Contact from "./components/contact";
+import { ISite } from "./type";
+import Loading from "./components/loading";
 
 function App() {
-  const { site } = useSiteData();
+  const { site, setSite } = useSiteData() as {
+    site: ISite;
+    setSite: (site: ISite) => void;
+  };
 
-  console.log(site);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    document.title = site.title ?? "Website";
+    const fetchSiteData = async () => {
+      setIsLoading(true);
+
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/site`);
+        const { data } = await response.json();
+        setSite(data);
+      } catch (e) {
+        console.error(e);
+      }
+
+      setIsLoading(false);
+    };
+
+    fetchSiteData();
+  }, [setSite]);
+
+  useEffect(() => {
+    document.title = site?.title ?? "Website";
 
     let linkFavicon = document.querySelector("link[rel~='icon']");
 
@@ -24,8 +47,12 @@ function App() {
       document.getElementsByTagName("head")[0].appendChild(link);
     }
 
-    (linkFavicon as HTMLLinkElement).href = site.favicon ?? "/vite.svg";
+    (linkFavicon as HTMLLinkElement).href = site?.favicon ?? "/vite.svg";
   }, [site]);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <ThemeProvider>
