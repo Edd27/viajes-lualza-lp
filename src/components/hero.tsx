@@ -1,11 +1,13 @@
 import useSiteData from "@/store/site";
 import Section from "./section";
+import { ISection } from "@/type";
 
 export default function Hero() {
   const { site } = useSiteData();
 
   const heroSection =
-    site?.sections?.find((section) => section?.name === "hero") ?? null;
+    site?.sections?.find((section: ISection) => section?.name === "hero") ??
+    null;
 
   return (
     <Section
