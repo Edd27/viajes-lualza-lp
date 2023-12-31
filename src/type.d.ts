@@ -24,16 +24,60 @@ export interface IAddress {
   country: string;
 }
 
+export interface IDatabase {
+  [key: string]: unknown | ITravel[];
+}
+
+export interface ITravel {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  date: string;
+  price: number;
+}
+
 export interface ISite {
   title: string;
   description: string;
   favicon: string;
   logo: string;
   sections: ISection[];
+  database: IDatabase;
 }
 
 export interface IImage {
   id: string;
   url: string;
   alt?: string;
+}
+
+export interface IRouterError {
+  statusText?: string;
+  message?: string;
+}
+
+export interface IEmail {
+  id: string;
+  value: string;
+  type: string;
+}
+
+export interface IPhone {
+  id: string;
+  number: string;
+  type: string;
+}
+
+export interface ISocial {
+  name: string;
+  url: string;
+}
+
+export interface ICompany {
+  name: string;
+  addresses: IAddress[];
+  emails: IEmail[];
+  phones: IPhone[];
+  socials: ISocial[];
 }

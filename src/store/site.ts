@@ -1,5 +1,5 @@
-import { ISite } from "@/type";
-import { create } from "zustand";
+import { ISite } from '@/type';
+import { create } from 'zustand';
 
 const useSiteData = create((set) => ({
   site: {} as ISite,
