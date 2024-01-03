@@ -16,19 +16,20 @@ export default function Contact() {
       ? contactSection?.content['map']?.replaceAll("\\'", '"')
       : '';
 
-  const contactData = contactSection?.content;
-  const email = contactData?.email;
-  const phone = contactData?.phone;
-  const address = contactData?.address;
+  const email: string | undefined = contactSection?.content?.email;
+  const phone: string | undefined = contactSection?.content?.phone;
+  const address: string | undefined = contactSection?.content?.address;
 
-  console.log(email, phone, address);
+  console.log(email); // Puede ser una cadena o undefined
+  console.log(phone); // Puede ser una cadena o undefined
+  console.log(address);
   return (
     <Section verticalAlignment='center'>
-      <h2 className='mb-10 text-2xl lg:text-3xl px-36 text-center'>
+      <h2 className='mb-10 text-2xl lg:text-3xl lg:px-36 text-center'>
         {contactSection?.title ?? 'Acerca de nosotros'}
       </h2>
-      <div className='flex w-full text-lg lg:text-2xl text-center items-center '>
-        <div className='w-1/2 flex flex-col items-center justify-center '>
+      <div className='flex flex-col lg:flex-row w-full text-lg lg:text-xl text-center items-center gap-4'>
+        <div className='w-full lg:w-1/2 flex flex-col items-center justify-center'>
           <h2 className='py-2 '>
             {address?.street} #{address?.number} {address?.city},{' '}
             {address?.state}
@@ -46,7 +47,7 @@ export default function Contact() {
             {email}
           </a>
         </div>
-        <div className='w-1/2 border rounded-md overflow-hidden h-[600px] flex flex-col'>
+        <div className='w-full lg:w-1/2 border rounded-md overflow-hidden h-[400px] lg:h-[600px] flex flex-col'>
           <div
             dangerouslySetInnerHTML={{
               __html: `${iframeMap}`,
