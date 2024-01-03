@@ -27,7 +27,7 @@ export default function Contact() {
       <h2 className='mb-10 text-2xl lg:text-3xl px-36 text-center'>
         {contactSection?.title ?? 'Acerca de nosotros'}
       </h2>
-      <div className='flex w-full text-lg lg:text-xl text-center items-center '>
+      <div className='flex w-full text-lg lg:text-2xl text-center items-center '>
         <div className='w-1/2 flex flex-col items-center justify-center '>
           <h2 className='py-2 '>
             {address?.street} #{address?.number} {address?.city},{' '}
