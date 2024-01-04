@@ -1,6 +1,6 @@
 import useSiteData from '@/store/site';
 import Section from './section';
-import { ISection, ISite } from '@/type';
+import { IContactContent, ISection, ISite } from '@/type';
 
 export default function Contact() {
   const { site } = useSiteData() as {
@@ -11,18 +11,15 @@ export default function Contact() {
     (section: ISection) => section?.name === 'contact'
   ) as ISection | undefined;
 
+  if (!contactSection) return null;
+
   const iframeMap =
     typeof contactSection?.content !== 'string'
       ? contactSection?.content['map']?.replaceAll("\\'", '"')
       : '';
 
-  const email: string | undefined = contactSection?.content?.email;
-  const phone: string | undefined = contactSection?.content?.phone;
-  const address: string | undefined = contactSection?.content?.address;
+  const { address, email, phone } = contactSection?.content as IContactContent;
 
-  console.log(email); // Puede ser una cadena o undefined
-  console.log(phone); // Puede ser una cadena o undefined
-  console.log(address);
   return (
     <Section verticalAlignment='center'>
       <h2 className='mb-10 text-2xl lg:text-3xl lg:px-36 text-center'>

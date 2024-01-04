@@ -1,6 +1,6 @@
 import useCompanyData from '@/store/company';
 import { ICompany } from '@/type';
-import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa6';
+import { Facebook, Instagram, Twitter } from 'lucide-react';
 
 export default function Footer() {
   const { company } = useCompanyData() as {
@@ -49,21 +49,21 @@ export default function Footer() {
                 target='_blank'
                 href={socialFA}
               >
-                <FaFacebook size={30} />
+                <Facebook className='size-6' />
               </a>
               <a
                 className='h-8 w-8'
                 target='_blank'
                 href={socialTW}
               >
-                <FaTwitter size={30} />
+                <Twitter className='size-6' />
               </a>
               <a
                 className='h-8 w-8'
                 target='_blank'
                 href={socialIG}
               >
-                <FaInstagram size={30} />
+                <Instagram className='size-6' />
               </a>
             </div>
           </div>
