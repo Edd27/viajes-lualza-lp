@@ -11,8 +11,6 @@ export default function Travels() {
 
   const travels = site?.database['travels'] ?? [];
 
-  console.log(travels);
-
   return (
     <Layout>
       <Section

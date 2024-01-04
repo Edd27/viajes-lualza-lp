@@ -70,12 +70,15 @@ export interface IPhone {
 }
 
 export interface ISocial {
+  id: string;
   name: string;
   url: string;
 }
 
 export interface ICompany {
   name: string;
+  slogan?: string;
+  description?: string;
   addresses: IAddress[];
   emails: IEmail[];
   phones: IPhone[];
