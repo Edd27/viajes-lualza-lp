@@ -26,7 +26,7 @@ export default function Section({
   children,
 }: SectionProps) {
   const plugin = useRef(
-    Autoplay({ delay: carouselDelay, stopOnInteraction: true })
+    Autoplay({ delay: carouselDelay, stopOnInteraction: false })
   );
 
   return (
