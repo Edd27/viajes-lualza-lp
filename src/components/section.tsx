@@ -52,8 +52,6 @@ export default function Section({
           <Carousel
             plugins={[plugin.current]}
             className='w-full'
-            onMouseEnter={plugin.current.stop}
-            onMouseLeave={plugin.current.reset}
           >
             <CarouselContent className='min-h-screen max-h-screen'>
               {carouselImages.map((img) => (
