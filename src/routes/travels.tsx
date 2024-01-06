@@ -17,7 +17,7 @@ export default function Travels() {
         className='pt-28'
         verticalAlignment='start'
       >
-        <h1 className='font-bold text-3xl mb-20'>Todas nuestras excursiones</h1>
+        <h1 className='font-bold text-3xl mb-20'>Todos nuestros viajes</h1>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
           {(travels as ITravel[]).map((travel: ITravel, index) => (
             <Card
