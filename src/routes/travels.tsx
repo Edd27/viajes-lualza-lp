@@ -6,7 +6,6 @@ import { ISite, ITravel } from '@/type';
 import { useState } from 'react';
 
 export default function Travels() {
-
   const [searchTerm, setSearchTerm] = useState('');
   const { site } = useSiteData() as {
     site: ISite;
@@ -29,19 +28,20 @@ export default function Travels() {
           className='p-2 border border-black rounded w-full md:w-[900px] dark:text-black mb-20'
         />
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-          {(travels as ITravel[])?.filter((travel: ITravel) =>
-            travel.title.toLowerCase().includes(searchTerm.toLowerCase())
-          )?.map((travel: ITravel, index) => (
-            <Card
-              key={travel.id || index}
-              title={travel.title}
-              description={travel.description}
-              image={travel.image}
-            />
-          ))}
+          {(travels as ITravel[])
+            ?.filter((travel: ITravel) =>
+              travel.title.toLowerCase().includes(searchTerm.toLowerCase())
+            )
+            ?.map((travel: ITravel, index) => (
+              <Card
+                key={travel.id || index}
+                title={travel.title}
+                description={travel.description}
+                image={travel.image}
+              />
+            ))}
         </div>
       </Section>
     </Layout>
   );
 }
-
