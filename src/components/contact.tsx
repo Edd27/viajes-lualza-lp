@@ -21,7 +21,10 @@ export default function Contact() {
   const { address, email, phone } = contactSection?.content as IContactContent;
 
   return (
-    <Section verticalAlignment='center'>
+    <Section
+      verticalAlignment='center'
+      className='bg-primary'
+    >
       <h2 className='mb-10 text-2xl lg:text-3xl lg:px-36 text-center'>
         {contactSection?.title ?? 'Acerca de nosotros'}
       </h2>
