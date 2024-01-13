@@ -1,5 +1,4 @@
-import WhatsAppIcon from "./icons/Whatsapp";
-
+import WhatsAppIcon from './icons/Whatsapp';
 
 interface ICard {
   title: string;
@@ -20,13 +19,10 @@ export default function Card({ title, description, image }: ICard) {
           {title}
         </h5>
         <p className='mb-3 font-normal text-pretty'>{description}</p>
-        <button className="bg-green-600 hover:bg-green-700 rounded-lg p-2 text-zinc-100 font-semibold flex flex-row gap-2 w-full items-center justify-center">
+        <button className='bg-green-600 hover:bg-green-700 rounded-lg p-2 text-zinc-100 font-semibold flex flex-row gap-2 w-full items-center justify-center'>
           <WhatsAppIcon />
-          <label>
-            Solicitar información
-          </label>
-          
-          </button>
+          <label>Solicitar información</label>
+        </button>
       </div>
     </div>
   );

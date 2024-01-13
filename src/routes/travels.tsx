@@ -7,7 +7,6 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Travels() {
-
   const [searchTerm, setSearchTerm] = useState('');
   const { site } = useSiteData() as {
     site: ISite;
