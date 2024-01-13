@@ -1,3 +1,4 @@
+import FloatAction from '@/components/float-action';
 import Footer from '@/components/footer';
 import Header from '@/components/header';
 import Loading from '@/components/loading';
@@ -67,6 +68,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <Header />
       <main>{children}</main>
       <Footer />
+      <FloatAction />
     </section>
   );
 }
