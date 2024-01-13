@@ -4,6 +4,7 @@ import Layout from '@/layouts/layout';
 import useSiteData from '@/store/site';
 import { ISite, ITravel } from '@/type';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Travels() {
 
@@ -32,12 +33,13 @@ export default function Travels() {
           {(travels as ITravel[])?.filter((travel: ITravel) =>
             travel.title.toLowerCase().includes(searchTerm.toLowerCase())
           )?.map((travel: ITravel, index) => (
+          <Link  key={travel.id || index} to={`/viajes/${travel.id}`}>
             <Card
-              key={travel.id || index}
+             
               title={travel.title}
               description={travel.description}
               image={travel.image}
-            />
+            /></Link>
           ))}
         </div>
       </Section>
