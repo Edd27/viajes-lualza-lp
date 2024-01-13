@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 import Travels from './routes/travels';
 import { ThemeProvider } from './components/theme-provider';
+import TravelDetail from './routes/travel-detail';
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,11 @@ const router = createBrowserRouter([
   {
     path: '/viajes',
     element: <Travels />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/viajes/:id',
+    element: <TravelDetail />,
     errorElement: <ErrorPage />,
   },
 ]);
