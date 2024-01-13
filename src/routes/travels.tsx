@@ -9,7 +9,7 @@ export default function Travels() {
     site: ISite;
   };
 
-  const travels = site?.database['travels'] ?? [];
+  const travels = site?.database?.travels ?? [];
 
   return (
     <Layout>
@@ -19,7 +19,7 @@ export default function Travels() {
       >
         <h1 className='font-bold text-3xl mb-20'>Todos nuestros viajes</h1>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-          {(travels as ITravel[]).map((travel: ITravel, index) => (
+          {(travels as ITravel[])?.map((travel: ITravel, index) => (
             <Card
               key={travel.id || index}
               title={travel.title}
