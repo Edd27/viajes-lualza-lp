@@ -10,7 +10,7 @@ export default function Header() {
 
   return (
     <header>
-      <nav className='w-full shadow mx-auto flex items-center justify-between fixed z-50 py-3 px-3 lg:px-24 bg-card dark:bg-primary'>
+      <nav className='fixed z-50 flex items-center justify-between w-full px-3 py-3 mx-auto shadow lg:px-24 bg-card dark:bg-primary'>
         <Link to='/'>
           <img
             src={site?.logo}
@@ -18,12 +18,15 @@ export default function Header() {
             className='w-10 h-10'
           />
         </Link>
-        <div className='w-full flex items-center justify-center gap-x-5 font-bold text-primary dark:text-inherit'>
+        <div className='flex items-center justify-center w-full font-bold gap-x-5 text-primary dark:text-inherit'>
           <Link to='/'>
             <span>Inicio</span>
           </Link>
           <Link to='/viajes'>
             <span>Viajes</span>
+          </Link>
+          <Link to='/galeria'>
+            <span>Galería</span>
           </Link>
         </div>
         <div className='flex items-center gap-x-4'>

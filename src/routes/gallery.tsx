@@ -17,14 +17,17 @@ export default function Gallery() {
         <h2 className='mb-20 text-2xl text-center lg:text-3xl lg:px-36'>
           Nuestros recuerdos
         </h2>
-        <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}>
-          <Masonry>
+        <ResponsiveMasonry
+          columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
+          style={{ width: '100%' }}
+        >
+          <Masonry gutter='0.5rem'>
             {images.map((image) => (
               <img
                 key={image}
                 src={image}
                 alt='image'
-                className='object-cover w-full h-full'
+                className='object-cover w-full h-full rounded-2xl'
                 loading='lazy'
                 decoding='async'
               />
