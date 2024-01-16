@@ -7,6 +7,7 @@ import './index.css';
 import Travels from './routes/travels';
 import { ThemeProvider } from './components/theme-provider';
 import TravelDetail from './routes/travel-detail';
+import Gallery from './routes/gallery';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,15 @@ const router = createBrowserRouter([
     path: '/viajes/:id',
     element: <TravelDetail />,
     errorElement: <ErrorPage />,
+  },
+  {
+    path: '/galeria',
+    element: <Gallery />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '*',
+    element: <ErrorPage />,
   },
 ]);
 
