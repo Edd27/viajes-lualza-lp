@@ -1,16 +1,16 @@
 import Layout from '@/layouts/layout';
+import useSiteData from '@/store/site';
+import { ISite } from '@/type';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
+import { IGallery } from '../type';
 
 export default function Gallery() {
-  //TODO: Implementar con API
-  const images: string[] = [
-    'https://picsum.photos/200/300?image=1050',
-    'https://picsum.photos/200/300?image=1051',
-    'https://picsum.photos/200/300?image=1052',
-    'https://picsum.photos/200/300?image=1053',
-    'https://picsum.photos/200/300?image=1054',
-    'https://picsum.photos/200/300?image=1055',
-  ];
+  const { site } = useSiteData() as {
+    site: ISite;
+  };
+  const images: IGallery[] = (site?.database?.gallery as IGallery[]) ?? [];
+
+  console.log({ images });
   return (
     <Layout>
       <div className='items-center justify-center w-full px-3 py-16 lg:px-24'>
@@ -24,8 +24,8 @@ export default function Gallery() {
           <Masonry gutter='0.5rem'>
             {images.map((image) => (
               <img
-                key={image}
-                src={image}
+                key={image.id}
+                src={image.url}
                 alt='image'
                 className='object-cover w-full h-full rounded-2xl'
                 loading='lazy'

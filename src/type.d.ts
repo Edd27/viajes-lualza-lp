@@ -25,7 +25,12 @@ export interface IAddress {
 }
 
 export interface IDatabase {
-  [key: string]: unknown | ITravel[];
+  [key: string]: unknown | ITravel[] | IGallery;
+}
+
+export interface IGallery {
+  id: string;
+  url: string;
 }
 
 export interface ITravel {

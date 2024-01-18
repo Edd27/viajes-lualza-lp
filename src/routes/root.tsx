@@ -3,6 +3,7 @@ import About from '../components/about';
 import Contact from '../components/contact';
 import Layout from '@/layouts/layout';
 import LastTravels from '@/components/LastTravels';
+import SponsorsCarrousel from '@/components/sponsors-carrousel';
 
 export default function Root() {
   return (
@@ -10,6 +11,7 @@ export default function Root() {
       <Hero />
       <About />
       <LastTravels />
+      <SponsorsCarrousel />
       <Contact />
     </Layout>
   );
