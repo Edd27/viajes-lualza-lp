@@ -1,4 +1,3 @@
-
 import WhatsAppIcon from '@/components/icons/Whatsapp';
 import Section from '@/components/section';
 import Layout from '@/layouts/layout';
@@ -16,6 +15,7 @@ export default function TravelDetail() {
   const travels = (site?.database?.travels as ITravel[]) ?? [];
 
   const travel = travels.find((t) => t.id === id);
+
   if (!travel) {
     return (
       <Layout>
@@ -34,7 +34,7 @@ export default function TravelDetail() {
       <Section
         className='text-center'
         verticalAlignment='center'
-        carouselImages={[{ id: '1', url: travel.image }]}
+        carouselImages={travel.images}
         carouselDelay={5000}
       >
         <div className='w-full p-6 rounded-xl backdrop-blur-lg text-white backdrop-brightness-75'>
@@ -45,12 +45,9 @@ export default function TravelDetail() {
       <Section>
         <article className='max-w-2xl'>
           <p className='text-pretty mb-10'>{travel.description}</p>
-          <button className="bg-green-600 hover:bg-green-700 rounded-lg p-2 text-zinc-100 font-semibold flex flex-row gap-2 items-center justify-center">
-          <WhatsAppIcon />
-          <label>
-            Solicitar información
-          </label>
-          
+          <button className='bg-green-600 hover:bg-green-700 rounded-lg p-2 text-zinc-100 font-semibold flex flex-row gap-2 items-center justify-center'>
+            <WhatsAppIcon />
+            <label>Solicitar información</label>
           </button>
         </article>
       </Section>

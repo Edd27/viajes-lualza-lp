@@ -29,20 +29,24 @@ export default function Travels() {
           className='p-2 border border-black rounded w-full md:w-[900px] dark:text-black mb-20'
         />
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-          {(travels as ITravel[])?.filter((travel: ITravel) =>
-            travel.title.toLowerCase().includes(searchTerm.toLowerCase())
-          )?.map((travel: ITravel, index) => (
-          <Link  key={travel.id || index} to={`/viajes/${travel.id}`}>
-            <Card
-             
-              title={travel.title}
-              description={travel.description}
-              image={travel.image}
-            /></Link>
-          ))}
+          {(travels as ITravel[])
+            ?.filter((travel: ITravel) =>
+              travel.title.toLowerCase().includes(searchTerm.toLowerCase())
+            )
+            ?.map((travel: ITravel, index) => (
+              <Link
+                key={travel.id || index}
+                to={`/viajes/${travel.id}`}
+              >
+                <Card
+                  title={travel.title}
+                  description={travel.description}
+                  image={travel.images[0]?.url}
+                />
+              </Link>
+            ))}
         </div>
       </Section>
     </Layout>
   );
 }
-

@@ -26,7 +26,7 @@ export default function LastTravels() {
             <Card
               title={travel.title}
               description={travel.description}
-              image={travel.image}
+              image={travel.images[0]?.url}
             />
           </Link>
         ))}

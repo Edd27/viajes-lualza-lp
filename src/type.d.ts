@@ -33,11 +33,16 @@ export interface IGallery {
   url: string;
 }
 
+export interface ITravelImage {
+  id: string;
+  url: string;
+}
+
 export interface ITravel {
   id: string;
   title: string;
   description: string;
-  image: string;
+  images: ITravelImage[];
   date: string;
   price: number;
 }
