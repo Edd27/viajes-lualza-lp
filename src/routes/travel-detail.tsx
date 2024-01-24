@@ -1,8 +1,9 @@
 import WhatsAppIcon from '@/components/icons/Whatsapp';
 import Section from '@/components/section';
 import Layout from '@/layouts/layout';
+import useCompanyData from '@/store/company';
 import useSiteData from '@/store/site';
-import { ISite, ITravel } from '@/type';
+import { ICompany, ISite, ITravel } from '@/type';
 import { useParams } from 'react-router-dom';
 
 export default function TravelDetail() {
@@ -12,9 +13,17 @@ export default function TravelDetail() {
     site: ISite;
   };
 
+  const { company } = useCompanyData() as {
+    company: ICompany;
+  };
+
   const travels = (site?.database?.travels as ITravel[]) ?? [];
 
   const travel = travels.find((t) => t.id === id);
+
+  const whatsAppMessage = encodeURIComponent(
+    `Hola, me gustaría saber más sobre ${travel?.title}`
+  );
 
   if (!travel) {
     return (
@@ -45,10 +54,16 @@ export default function TravelDetail() {
       <Section>
         <article className='max-w-2xl'>
           <p className='text-pretty mb-10'>{travel.description}</p>
-          <button className='bg-green-600 hover:bg-green-700 rounded-lg p-2 text-zinc-100 font-semibold flex flex-row gap-2 items-center justify-center'>
+          <a
+            className='bg-green-600 hover:bg-green-700 rounded-lg p-2 text-zinc-100 font-semibold flex flex-row gap-2 items-center justify-center'
+            target='_blank'
+            href={`https://api.whatsapp.com/send?phone=${company?.phones?.find(
+              (p) => p.type === 'whatsapp'
+            )}&text=${whatsAppMessage}`}
+          >
             <WhatsAppIcon />
-            <label>Solicitar información</label>
-          </button>
+            Solicitar informacion
+          </a>
         </article>
       </Section>
     </Layout>
