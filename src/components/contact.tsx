@@ -23,7 +23,7 @@ export default function Contact() {
   return (
     <Section
       verticalAlignment='center'
-      className='bg-primary'
+      className='bg-primary text-white'
     >
       <h2 className='mb-10 text-2xl lg:text-3xl lg:px-36 text-center'>
         {contactSection?.title ?? 'Acerca de nosotros'}
