@@ -42,6 +42,7 @@ export default function Travels() {
                   title={travel.title}
                   description={travel.description}
                   image={travel.images[0]?.url}
+                  href={`/viajes/${travel.id}`}
                 />
               </Link>
             ))}
