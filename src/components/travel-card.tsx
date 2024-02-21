@@ -32,7 +32,7 @@ export default function TravelCard({ travel, href }: ITravelCardProps) {
   );
 
   return (
-    <Card className='overflow-hidden p-0'>
+    <Card className='overflow-hidden p-0 lg:max-w-[340px]'>
       <CardHeader className='p-0 max-h-[225px] overflow-hidden'>
         {travel.images.length > 1 ? (
           <Carousel
