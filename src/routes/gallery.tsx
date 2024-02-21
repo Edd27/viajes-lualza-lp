@@ -1,22 +1,39 @@
+import Section from '@/components/section';
 import Layout from '@/layouts/layout';
-import useSiteData from '@/store/site';
-import { ISite } from '@/type';
+import useAppStore from '@/store/app-store';
+import { ICompany, ITravelImage } from '@/type';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
-import { IGallery } from '../type';
 
 export default function Gallery() {
-  const { site } = useSiteData() as {
-    site: ISite;
+  const { company } = useAppStore() as {
+    company: ICompany;
   };
-  const images: IGallery[] = (site?.database?.gallery as IGallery[]) ?? [];
 
-  console.log({ images });
+  if (!company) return null;
+
+  const images = company.travels.reduce(
+    (acc, travel) => [...acc, ...travel.images],
+    [] as ITravelImage[]
+  );
+
+  if (images.length === 0)
+    return (
+      <Layout>
+        <Section
+          className='pt-28'
+          verticalAlignment='center'
+        >
+          <h1 className='font-bold text-3xl mb-20'>
+            Aun no tenemos imagenes en nuestra galeria.
+          </h1>
+        </Section>
+      </Layout>
+    );
+
   return (
     <Layout>
-      <div className='items-center justify-center w-full px-3 py-16 lg:px-24'>
-        <h2 className='mb-20 text-2xl text-center lg:text-3xl lg:px-36'>
-          Nuestros recuerdos
-        </h2>
+      <Section>
+        <h1 className='font-bold text-3xl mb-20'>Nuestra galería.</h1>
         <ResponsiveMasonry
           columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
           style={{ width: '100%' }}
@@ -26,7 +43,7 @@ export default function Gallery() {
               <img
                 key={image.id}
                 src={image.url}
-                alt='image'
+                alt={`Recuerdo de ${image.createdAt}`}
                 className='object-cover w-full h-full rounded-2xl'
                 loading='lazy'
                 decoding='async'
@@ -34,7 +51,7 @@ export default function Gallery() {
             ))}
           </Masonry>
         </ResponsiveMasonry>
-      </div>
+      </Section>
     </Layout>
   );
 }

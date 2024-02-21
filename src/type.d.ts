@@ -1,96 +1,123 @@
-export interface ISection {
+export interface ICompany {
+  id: string;
   name: string;
-  title: string;
-  content: IContactContent | string;
-  images?: IImage[];
-  background?: string;
+  logo: string;
+  description?: string | null;
+  slogan?: string | null;
+  websiteUrl: string;
+  primaryColor: string;
+  secondaryColor: string;
+  accentColor: string;
+  backgroundColor: string;
+  textColor: string;
+  createdAt: string;
+  updatedAt: string;
+  customerId: string;
+  addresses: IAddress[];
+  emails: IEmail[];
+  images: ICompanyImage[];
+  phones: IPhone[];
+  socials: ISocial[];
+  travels: ITravel[];
 }
 
-export interface IContactContent {
-  phone: string;
-  email: string;
-  address: Address;
-  map: string;
+export interface ICompanyImage {
+  id: string;
+  url: string;
+  createdAt: string;
+  updatedAt: string;
+  companyId: string;
 }
 
 export interface IAddress {
   id: string;
   street: string;
-  number: number;
-  zip: number;
-  suburb: string;
+  number: string;
   city: string;
   state: string;
-  country: string;
-}
-
-export interface IDatabase {
-  [key: string]: unknown | ITravel[] | IGallery;
-}
-
-export interface IGallery {
-  id: string;
-  url: string;
-}
-
-export interface ITravelImage {
-  id: string;
-  url: string;
-}
-
-export interface ITravel {
-  id: string;
-  title: string;
-  description: string;
-  images: ITravelImage[];
-  date: string;
-  price: number;
-}
-
-export interface ISite {
-  title: string;
-  description: string;
-  favicon: string;
-  logo: string;
-  sections: ISection[];
-  database: IDatabase;
-}
-
-export interface IImage {
-  id: string;
-  url: string;
-  alt?: string;
-}
-
-export interface IRouterError {
-  statusText?: string;
-  message?: string;
-}
-
-export interface IEmail {
-  id: string;
-  value: string;
-  type: string;
+  zipCode: string;
+  suburb: string;
+  location: string;
+  description?: string | null;
+  mapFrame?: string | null;
+  createdAt: string;
+  updatedAt: string;
+  companyId: string;
 }
 
 export interface IPhone {
   id: string;
-  number: string;
+  phone: string;
   type: string;
+  createdAt: string;
+  updatedAt: string;
+  companyId: string;
+}
+
+export interface IEmail {
+  id: string;
+  email: string;
+  type: string;
+  createdAt: string;
+  updatedAt: string;
+  companyId: string;
 }
 
 export interface ISocial {
   id: string;
   name: string;
   url: string;
+  code: string;
+  createdAt: string;
+  updatedAt: string;
+  companyId: string;
 }
 
-export interface ICompany {
+export interface ITravel {
+  id: string;
   name: string;
-  slogan?: string;
-  description?: string;
-  addresses: IAddress[];
-  emails: IEmail[];
-  phones: IPhone[];
-  socials: ISocial[];
+  description?: string | null;
+  location?: string | null;
+  initialDate?: string | null;
+  endDate?: string | null;
+  isActivated: boolean;
+  createdAt: string;
+  updatedAt: string;
+  companyId: string;
+  images: ITravelImage[];
+  prices: ITravelPrice[];
+}
+
+export interface ITravelImage {
+  id: string;
+  url: string;
+  createdAt: string;
+  updatedAt: string;
+  travelId: string;
+}
+
+export interface ITravelPrice {
+  id: string;
+  price: number;
+  currency: string;
+  createdAt: string;
+  updatedAt: string;
+  travelId: string;
+  typeId: string;
+  type: ITravelPriceType;
+  companyId: string;
+}
+
+export interface ITravelPriceType {
+  id: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+  companyId: string;
+}
+
+export interface IRouterError {
+  statsu?: number;
+  statusText?: string;
+  message?: string;
 }

@@ -1,18 +1,21 @@
-import Card from '@/components/card';
+import Card from '@/components/travel-card';
 import Section from '@/components/section';
 import Layout from '@/layouts/layout';
-import useSiteData from '@/store/site';
-import { ISite, ITravel } from '@/type';
+import useAppStore from '@/store/app-store';
+import { ICompany } from '@/type';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Travels() {
   const [searchTerm, setSearchTerm] = useState('');
-  const { site } = useSiteData() as {
-    site: ISite;
+
+  const { company } = useAppStore() as {
+    company: ICompany;
   };
 
-  const travels = site?.database?.travels ?? [];
+  if (!company) return null;
+
+  const travels = company.travels;
 
   return (
     <Layout>
@@ -29,19 +32,17 @@ export default function Travels() {
           className='p-2 border border-black rounded w-full md:w-[900px] dark:text-black mb-20'
         />
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-          {(travels as ITravel[])
-            ?.filter((travel: ITravel) =>
-              travel.title.toLowerCase().includes(searchTerm.toLowerCase())
+          {travels
+            ?.filter((travel) =>
+              travel.name.toLowerCase().includes(searchTerm.toLowerCase())
             )
-            ?.map((travel: ITravel, index) => (
+            ?.map((travel, index) => (
               <Link
                 key={travel.id || index}
                 to={`/viajes/${travel.id}`}
               >
                 <Card
-                  title={travel.title}
-                  description={travel.description}
-                  image={travel.images[0]?.url}
+                  travel={travel}
                   href={`/viajes/${travel.id}`}
                 />
               </Link>

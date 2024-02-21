@@ -1,6 +1,5 @@
-import useCompanyData from '@/store/company';
-import useSiteData from '@/store/site';
-import { ICompany, ISite } from '@/type';
+import useAppStore from '@/store/app-store';
+import { ICompany } from '@/type';
 import { Facebook, Instagram, Twitter } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -13,13 +12,11 @@ const SOCIAL_ICONS: {
 };
 
 export default function Footer() {
-  const { company } = useCompanyData() as {
+  const { company } = useAppStore() as {
     company: ICompany;
   };
 
-  const { site } = useSiteData() as {
-    site: ISite;
-  };
+  if (!company) return null;
 
   return (
     <footer className='bg-primary text-white'>
@@ -31,15 +28,15 @@ export default function Footer() {
               className='flex items-center'
             >
               <img
-                src={site?.logo}
-                alt={`Logo ${site?.title}`}
+                src={company.logo}
+                alt={`Logo ${company.name}`}
                 className='h-8 me-3'
               />
               <span className='self-center text-2xl font-semibold whitespace-nowrap'>
                 {company?.name}
               </span>
             </Link>
-            <p className='max-w-xs text-pretty'>{company?.description}</p>
+            <p className='max-w-xs text-pretty'>{company.description}</p>
           </div>
           <div className='grid md:grid-cols-2 gap-3 md:gap-6'>
             <div>
@@ -53,10 +50,10 @@ export default function Footer() {
                     key={phone.id}
                   >
                     <a
-                      href={`tel:${phone.number}`}
+                      href={`tel:${phone.phone}`}
                       className='hover:underline'
                     >
-                      {phone.number}
+                      {phone.phone}
                     </a>
                   </li>
                 ))}
@@ -73,7 +70,7 @@ export default function Footer() {
                     className='max-w-60'
                   >
                     <a
-                      href={`https://www.google.com/maps?q=${address.street}+${address.number}+${address.suburb}+${address.zip}+${address.city}+${address.state}`}
+                      href={`https://www.google.com/maps?q=${address.street}+${address.number}+${address.suburb}+${address.zipCode}+${address.city}+${address.state}`}
                       target='_blank'
                       rel='noreferrer noopener'
                       key={address.id}
@@ -81,7 +78,7 @@ export default function Footer() {
                     >
                       <span>
                         {address.street} {address.number}, {address.suburb},{' '}
-                        {address.zip} {address.city}, {address.state}.
+                        {address.zipCode} {address.city}, {address.state}.
                       </span>
                     </a>
                   </li>
@@ -110,7 +107,7 @@ export default function Footer() {
                 href={social.url}
                 key={social.id}
               >
-                {SOCIAL_ICONS[social.name.toLowerCase()]}
+                {SOCIAL_ICONS[social.code.toLowerCase()]}
                 <span className='sr-only'>{social.name}</span>
               </a>
             ))}

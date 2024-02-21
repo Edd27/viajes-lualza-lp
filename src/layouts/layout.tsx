@@ -2,50 +2,46 @@ import FloatAction from '@/components/float-action';
 import Footer from '@/components/footer';
 import Header from '@/components/header';
 import Loading from '@/components/loading';
-import useCompanyData from '@/store/company';
-import useSiteData from '@/store/site';
-import { ICompany, ISite } from '@/type';
+import ErrorPage from '@/error-page';
+import useAppStore from '@/store/app-store';
+import { ICompany } from '@/type';
 import { useEffect, useState } from 'react';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
-  const { site, setSite } = useSiteData() as {
-    site: ISite;
-    setSite: (site: ISite) => void;
-  };
-  const { setCompany } = useCompanyData() as {
+  const [error, setError] = useState(false);
+
+  const { company, setCompany } = useAppStore() as {
+    company: ICompany;
     setCompany: (company: ICompany) => void;
   };
 
   useEffect(() => {
-    setIsLoading(true);
-    const fetchSiteData = async () => {
-      try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/site`);
-        const { data } = await response.json();
-        setSite(data);
-      } catch (e) {
-        console.error(e);
-      }
-    };
+    const fetchDataFromApi = async () => {
+      setIsLoading(true);
 
-    const fetchCompanyData = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/company`);
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/companies/${
+            import.meta.env.VITE_COMPANY_ID
+          }/public-profile`
+        );
+
         const { data } = await response.json();
+
         setCompany(data);
       } catch (e) {
-        console.error(e);
+        setError(true);
       }
+
+      setIsLoading(false);
     };
 
-    fetchSiteData();
-    fetchCompanyData();
-    setIsLoading(false);
-  }, [setSite, setCompany]);
+    fetchDataFromApi();
+  }, [setCompany]);
 
   useEffect(() => {
-    document.title = site?.title ?? 'Website';
+    document.title = company.name ?? 'Web site';
 
     let linkFavicon = document.querySelector("link[rel~='icon']");
 
@@ -56,11 +52,19 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       document.getElementsByTagName('head')[0].appendChild(link);
     }
 
-    (linkFavicon as HTMLLinkElement).href = site?.favicon ?? '/vite.svg';
-  }, [site]);
+    (linkFavicon as HTMLLinkElement).href = company?.logo ?? '/vite.svg';
+  }, [company]);
+
+  if (error) {
+    return <ErrorPage />;
+  }
 
   if (isLoading) {
     return <Loading />;
+  }
+
+  if (!company) {
+    return <ErrorPage />;
   }
 
   return (

@@ -1,29 +1,20 @@
 import WhatsAppIcon from '@/components/icons/Whatsapp';
 import Section from '@/components/section';
 import Layout from '@/layouts/layout';
-import useCompanyData from '@/store/company';
-import useSiteData from '@/store/site';
-import { ICompany, ISite, ITravel } from '@/type';
+import useAppStore from '@/store/app-store';
+import { ICompany } from '@/type';
 import { useParams } from 'react-router-dom';
 
 export default function TravelDetail() {
   const { id } = useParams();
 
-  const { site } = useSiteData() as {
-    site: ISite;
-  };
-
-  const { company } = useCompanyData() as {
+  const { company } = useAppStore() as {
     company: ICompany;
   };
 
-  const travels = (site?.database?.travels as ITravel[]) ?? [];
+  if (!company) return null;
 
-  const travel = travels.find((t) => t.id === id);
-
-  const whatsAppMessage = encodeURIComponent(
-    `Hola, me gustaría saber más sobre ${travel?.title}`
-  );
+  const travel = company.travels.find((t) => t.id === id);
 
   if (!travel) {
     return (
@@ -38,6 +29,10 @@ export default function TravelDetail() {
     );
   }
 
+  const whatsAppMessage = encodeURIComponent(
+    `Hola, me gustaría saber más sobre ${travel.name}`
+  );
+
   return (
     <Layout>
       <Section
@@ -47,8 +42,12 @@ export default function TravelDetail() {
         carouselDelay={5000}
       >
         <div className='w-full p-6 rounded-xl backdrop-blur-lg text-white backdrop-brightness-75'>
-          <h2 className='md:text-7xl mb-3 font-semibold '>{travel.title}</h2>
-          <h3 className='md:text-3xl'>{travel.date}</h3>
+          <h2 className='md:text-7xl mb-3 font-semibold '>{travel.name}</h2>
+          {travel.initialDate || travel.endDate ? (
+            <h3 className='md:text-3xl'>
+              {travel.initialDate} {`- ${travel.endDate}`}
+            </h3>
+          ) : null}
         </div>
       </Section>
       <Section>
@@ -58,7 +57,7 @@ export default function TravelDetail() {
             className='bg-green-600 hover:bg-green-700 rounded-lg p-2 text-zinc-100 font-semibold flex flex-row gap-2 items-center justify-center'
             target='_blank'
             href={`https://api.whatsapp.com/send?phone=${company?.phones?.find(
-              (p) => p.type === 'whatsapp'
+              (p) => p.type === 'WHATSAPP'
             )}&text=${whatsAppMessage}`}
           >
             <WhatsAppIcon />

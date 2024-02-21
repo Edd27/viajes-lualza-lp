@@ -2,10 +2,10 @@ import { useRef, type ReactNode } from 'react';
 import Autoplay from 'embla-carousel-autoplay';
 import { cn } from '@/lib/utils';
 import { Carousel, CarouselContent, CarouselItem } from './ui/carousel';
-import { IImage } from '@/type';
+import { ICompanyImage, ITravelImage } from '@/type';
 
 type SectionProps = {
-  carouselImages?: IImage[];
+  carouselImages?: ICompanyImage[] | ITravelImage[];
   carouselDelay?: number;
   background?: string;
   verticalAlignment?: 'start' | 'center' | 'end' | 'between';

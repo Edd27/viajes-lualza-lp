@@ -1,20 +1,22 @@
-import useSiteData from '@/store/site';
+import useAppStore from '@/store/app-store';
 import { ModeToggle } from './mode-toggle';
-import { ISite } from '@/type';
 import { Link } from 'react-router-dom';
+import { ICompany } from '@/type';
 
 export default function Header() {
-  const { site } = useSiteData() as {
-    site: ISite;
+  const { company } = useAppStore() as {
+    company: ICompany;
   };
+
+  if (!company) return null;
 
   return (
     <header>
       <nav className='fixed z-50 flex items-center justify-between w-full px-3 py-3 mx-auto shadow lg:px-24 bg-card dark:bg-primary'>
         <Link to='/'>
           <img
-            src={site?.logo}
-            alt={`Logo ${site?.title}`}
+            src={company.logo}
+            alt={`Logo ${company.name}`}
             className='w-10 h-10'
           />
         </Link>
