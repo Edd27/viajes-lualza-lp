@@ -1,7 +1,6 @@
 import useAppStore from '@/store/app-store';
 import Section from './section';
-
-import Card from './travel-card';
+import TravelCard from './travel-card';
 import { ICompany } from '@/type';
 
 export default function LastTravels() {
@@ -15,12 +14,10 @@ export default function LastTravels() {
 
   return (
     <Section verticalAlignment='start'>
-      <h2 className='mb-20 text-2xl lg:text-3xl lg:px-36 text-center'>
-        Nuestros últimos viajes
-      </h2>
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+      <h2 className='font-bold text-3xl mb-20'>Nuestros ultimos viajes</h2>
+      <div className='w-full grid gap-3 grid-cols-[repeat(auto-fill,minmax(260px,1fr))]'>
         {lastTravels.map((travel) => (
-          <Card
+          <TravelCard
             travel={travel}
             key={travel.id}
             href={`/viajes/${travel.id}`}

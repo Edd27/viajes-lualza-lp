@@ -24,9 +24,9 @@ export interface ICompany {
 export interface ICompanyImage {
   id: string;
   url: string;
-  createdAt: string;
-  updatedAt: string;
-  companyId: string;
+  createdAt?: string | null;
+  updatedAt?: string | null;
+  companyId?: string | null;
 }
 
 export interface IAddress {

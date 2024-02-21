@@ -15,8 +15,11 @@ export default function Contact() {
         Acerca de nosotros
       </h2>
       {company?.addresses?.map(
-        ({ street, number, suburb, zipCode, city, state, mapFrame }) => (
-          <div className='flex flex-col lg:flex-row w-full text-lg lg:text-xl text-center items-center gap-4'>
+        ({ street, number, suburb, zipCode, city, state, mapFrame, id }) => (
+          <div
+            className='flex flex-col lg:flex-row w-full text-lg lg:text-xl text-center items-center gap-4'
+            key={id}
+          >
             <div className='w-full lg:w-1/2 flex flex-col items-center justify-center'>
               <h2 className='py-2 '>
                 {street} {number}, {suburb}, {zipCode}, {city}, {state}.

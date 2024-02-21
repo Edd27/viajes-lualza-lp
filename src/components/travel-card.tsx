@@ -5,13 +5,20 @@ import useAppStore from '@/store/app-store';
 import { Carousel, CarouselContent, CarouselItem } from './ui/carousel';
 import { useRef } from 'react';
 import Autoplay from 'embla-carousel-autoplay';
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from '@/components/ui/card';
+import { Button } from './ui/button';
 
 interface ITravelCardProps {
   travel: ITravel;
   href: string;
 }
 
-export default function Card({ travel, href }: ITravelCardProps) {
+export default function TravelCard({ travel, href }: ITravelCardProps) {
   const plugin = useRef(Autoplay({ delay: 2000, stopOnInteraction: false }));
 
   const { company } = useAppStore() as {
@@ -25,42 +32,54 @@ export default function Card({ travel, href }: ITravelCardProps) {
   );
 
   return (
-    <div className='lg:max-w-sm bg-card dark:bg-secondary border hover:dark:bg-gray-900 hover:bg-zinc-200 rounded-lg shadow bg-zinc-100 border-zinc-300 dark:border-zinc-600 '>
-      <Carousel
-        plugins={[plugin.current]}
-        className='w-full rounded-t-lg overflow-hidden'
-      >
-        <CarouselContent className='min-h-screen max-h-screen'>
-          {travel.images.map((img) => (
-            <CarouselItem
-              key={img.id}
-              className='p-0 border-none brightness-50'
-            >
-              <img
-                className='w-full h-full object-cover'
-                src={img.url}
-                alt={`Imagen ${img.id} de viaje ${travel.name}`}
-              />
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-      </Carousel>
-      <div className='p-5'>
-        <h5 className='mb-2 text-2xl font-bold tracking-tight text-primary'>
-          {travel.name}
-        </h5>
-        {travel.description ? (
-          <p className='mb-3 font-normal text-pretty'>{travel.description}</p>
-        ) : null}
-        <div className='flex gap-2'>
-          <Link
-            to={href}
-            className='flex w-full border bg-primary rounded-lg p-2 text-zinc-100 font-semibold items-center justify-center'
+    <Card className='overflow-hidden p-0'>
+      <CardHeader className='p-0 max-h-[225px] overflow-hidden'>
+        {travel.images.length > 1 ? (
+          <Carousel
+            plugins={[plugin.current]}
+            className='w-full h-full'
           >
-            Mas informacion
-          </Link>
+            <CarouselContent>
+              {travel.images.map((img) => (
+                <CarouselItem
+                  key={img.id}
+                  className='p-0 border-none w-full h-full'
+                >
+                  <img
+                    className='w-full h-full object-cover object-center'
+                    src={img.url}
+                    alt={`Imagen ${img.id} de viaje ${travel.name}`}
+                  />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+        ) : (
+          <img
+            src='https://programacion.net/files/article/20161110041116_image-not-found.png'
+            alt='Imagen no encontrada'
+            className='w-full h-full object-cover'
+          />
+        )}
+      </CardHeader>
+      <CardContent className='p-6'>
+        <h2 className='font-bold'>{travel.name}</h2>
+        {travel.description ? (
+          <p className='opacity-70'>{travel.description}</p>
+        ) : null}
+      </CardContent>
+      <CardFooter className='flex gap-3'>
+        <Button
+          asChild
+          className='w-full'
+        >
+          <Link to={href}>Ver más</Link>
+        </Button>
+        <Button
+          asChild
+          variant='secondary'
+        >
           <a
-            className=' bg-green-600 hover:bg-green-700 rounded-lg p-2 text-zinc-100 font-semibold  flex items-center justify-center w-auto '
             href={`https://api.whatsapp.com/send?phone=${company?.phones?.find(
               (p) => p.type === 'WHATSAPP'
             )}&text=${whatsAppMessage}`}
@@ -68,8 +87,8 @@ export default function Card({ travel, href }: ITravelCardProps) {
           >
             <WhatsAppIcon />
           </a>
-        </div>
-      </div>
-    </div>
+        </Button>
+      </CardFooter>
+    </Card>
   );
 }

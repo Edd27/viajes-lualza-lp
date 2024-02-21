@@ -1,10 +1,10 @@
-import Card from '@/components/travel-card';
+import TravelCard from '@/components/travel-card';
 import Section from '@/components/section';
 import Layout from '@/layouts/layout';
 import useAppStore from '@/store/app-store';
 import { ICompany } from '@/type';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Input } from '@/components/ui/input';
 
 export default function Travels() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -23,30 +23,28 @@ export default function Travels() {
         className='pt-28'
         verticalAlignment='start'
       >
-        <h1 className='font-bold text-3xl mb-20'>Todos nuestros viajes</h1>
-        <input
-          type='text'
-          placeholder='Buscar viajes...'
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className='p-2 border border-black rounded w-full md:w-[900px] dark:text-black mb-20'
-        />
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-          {travels
-            ?.filter((travel) =>
-              travel.name.toLowerCase().includes(searchTerm.toLowerCase())
-            )
-            ?.map((travel, index) => (
-              <Link
-                key={travel.id || index}
-                to={`/viajes/${travel.id}`}
-              >
-                <Card
+        <h1 className='font-bold text-3xl mb-12'>Todos nuestros viajes</h1>
+        <div className='w-full flex flex-col gap-4 lg:gap-10 items-center'>
+          <Input
+            type='text'
+            placeholder='Playa del carmen'
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className='w-full lg:w-1/2'
+          />
+          <div className='w-full grid gap-3 grid-cols-[repeat(auto-fill,minmax(260px,1fr))]'>
+            {travels
+              ?.filter((travel) =>
+                travel.name.toLowerCase().includes(searchTerm.toLowerCase())
+              )
+              ?.map((travel) => (
+                <TravelCard
+                  key={travel.id}
                   travel={travel}
                   href={`/viajes/${travel.id}`}
                 />
-              </Link>
-            ))}
+              ))}
+          </div>
         </div>
       </Section>
     </Layout>

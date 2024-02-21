@@ -1,8 +1,11 @@
 import WhatsAppIcon from '@/components/icons/Whatsapp';
 import Section from '@/components/section';
+import { Button } from '@/components/ui/button';
 import Layout from '@/layouts/layout';
+import { formatDateTime, heroImagesByDefault } from '@/lib/utils';
 import useAppStore from '@/store/app-store';
 import { ICompany } from '@/type';
+import { MoveVertical } from 'lucide-react';
 import { useParams } from 'react-router-dom';
 
 export default function TravelDetail() {
@@ -14,16 +17,16 @@ export default function TravelDetail() {
 
   if (!company) return null;
 
-  const travel = company.travels.find((t) => t.id === id);
+  const travel = company.travels?.find((t) => t.id === id);
 
   if (!travel) {
     return (
       <Layout>
         <Section
           className='pt-28'
-          verticalAlignment='start'
+          verticalAlignment='center'
         >
-          <h1 className='font-bold text-3xl mb-20'>Viaje no encontrado</h1>
+          <h1 className='font-bold text-3xl'>Viaje no encontrado</h1>
         </Section>
       </Layout>
     );
@@ -36,33 +39,56 @@ export default function TravelDetail() {
   return (
     <Layout>
       <Section
-        className='text-center'
-        verticalAlignment='center'
-        carouselImages={travel.images}
+        carouselImages={
+          travel.images?.length > 0 ? travel.images : heroImagesByDefault
+        }
         carouselDelay={5000}
+        verticalAlignment='center'
+        className='text-white text-center'
       >
-        <div className='w-full p-6 rounded-xl backdrop-blur-lg text-white backdrop-brightness-75'>
-          <h2 className='md:text-7xl mb-3 font-semibold '>{travel.name}</h2>
-          {travel.initialDate || travel.endDate ? (
-            <h3 className='md:text-3xl'>
-              {travel.initialDate} {`- ${travel.endDate}`}
-            </h3>
-          ) : null}
-        </div>
+        <h1 className='text-3xl lg:text-5xl font-bold mb-10'>
+          {travel?.name ?? 'Nombre de la empresa'}
+        </h1>
+        {travel.initialDate || travel.endDate ? (
+          <div className='flex flex-col items-center justify-center gap-4'>
+            {travel.initialDate ? (
+              <p className='border border-primary text-primary bg-secondary px-2 py-1 rounded-lg w-[120px]'>
+                {formatDateTime(new Date(travel.initialDate), 'es-MX', {
+                  dateStyle: 'medium',
+                })}
+              </p>
+            ) : null}
+            {travel.endDate ? (
+              <>
+                <MoveVertical />
+                <p className='bg-primary text-white px-2 py-1 rounded-lg w-[120px]'>
+                  {formatDateTime(new Date(travel.endDate), 'es-MX', {
+                    dateStyle: 'medium',
+                  })}
+                </p>
+              </>
+            ) : null}
+          </div>
+        ) : null}
       </Section>
-      <Section>
-        <article className='max-w-2xl'>
-          <p className='text-pretty mb-10'>{travel.description}</p>
-          <a
-            className='bg-green-600 hover:bg-green-700 rounded-lg p-2 text-zinc-100 font-semibold flex flex-row gap-2 items-center justify-center'
-            target='_blank'
-            href={`https://api.whatsapp.com/send?phone=${company?.phones?.find(
-              (p) => p.type === 'WHATSAPP'
-            )}&text=${whatsAppMessage}`}
+      <Section screenHeight={false}>
+        <article className='flex flex-col items-center gap-10'>
+          <p className='text-pretty'>{travel.description}</p>
+          <Button
+            variant='outline'
+            asChild
           >
-            <WhatsAppIcon />
-            Solicitar informacion
-          </a>
+            <a
+              target='_blank'
+              href={`https://api.whatsapp.com/send?phone=${company?.phones?.find(
+                (p) => p.type === 'WHATSAPP'
+              )}&text=${whatsAppMessage}`}
+              className='flex items-center gap-2'
+            >
+              <WhatsAppIcon />
+              Solicitar informacion
+            </a>
+          </Button>
         </article>
       </Section>
     </Layout>

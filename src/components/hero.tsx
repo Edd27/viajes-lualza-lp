@@ -1,6 +1,7 @@
 import useAppStore from '@/store/app-store';
 import Section from './section';
 import { ICompany } from '@/type';
+import { heroImagesByDefault } from '@/lib/utils';
 
 export default function Hero() {
   const { company } = useAppStore() as {
@@ -11,7 +12,9 @@ export default function Hero() {
 
   return (
     <Section
-      carouselImages={company.images ?? []}
+      carouselImages={
+        company.images?.length > 0 ? company.images : heroImagesByDefault
+      }
       carouselDelay={5000}
       verticalAlignment='center'
       className='text-white text-center'
