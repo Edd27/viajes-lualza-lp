@@ -1,6 +1,7 @@
 import useAppStore from '@/store/app-store';
-import Section from './section';
 import { ICompany } from '@/type';
+import MapFrame from './map-frame';
+import Section from './section';
 
 export default function Contact() {
   const { company } = useAppStore() as {
@@ -12,32 +13,19 @@ export default function Contact() {
   return (
     <Section verticalAlignment='center'>
       <h2 className='mb-10 text-2xl lg:text-3xl lg:px-36 text-center'>
-        Acerca de nosotros
+        Encuentranos
       </h2>
-      {company?.addresses?.map(
-        ({ street, number, suburb, zipCode, city, state, mapFrame, id }) => (
-          <div
-            className='flex flex-col lg:flex-row w-full text-lg lg:text-xl text-center items-center gap-4'
-            key={id}
-          >
-            <div className='w-full lg:w-1/2 flex flex-col items-center justify-center'>
-              <h2 className='py-2 '>
-                {street} {number}, {suburb}, {zipCode}, {city}, {state}.
-              </h2>
-            </div>
-            {mapFrame ? (
-              <div className='w-full lg:w-1/2 border rounded-md overflow-hidden h-[400px] lg:h-[600px] flex flex-col'>
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: `${mapFrame.replaceAll("\\'", '"')}`,
-                  }}
-                  className='h-full w-full'
-                />
-              </div>
-            ) : null}
-          </div>
-        )
-      )}
+      {company.addresses.map((address) => (
+        <article
+          className='overflow-hidden rounded-md w-full h-[800px]'
+          key={address.id}
+        >
+          <MapFrame
+            address={address}
+            zoom={19}
+          />
+        </article>
+      ))}
     </Section>
   );
 }

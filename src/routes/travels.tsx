@@ -1,10 +1,10 @@
-import TravelCard from '@/components/travel-card';
 import Section from '@/components/section';
+import TravelCard from '@/components/travel-card';
+import { Input } from '@/components/ui/input';
 import Layout from '@/layouts/layout';
 import useAppStore from '@/store/app-store';
 import { ICompany } from '@/type';
 import { useState } from 'react';
-import { Input } from '@/components/ui/input';
 
 export default function Travels() {
   const [searchTerm, setSearchTerm] = useState('');

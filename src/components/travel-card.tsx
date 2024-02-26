@@ -1,17 +1,17 @@
-import { ICompany, ITravel } from '@/type';
-import WhatsAppIcon from './icons/Whatsapp';
-import { Link } from 'react-router-dom';
-import useAppStore from '@/store/app-store';
-import { Carousel, CarouselContent, CarouselItem } from './ui/carousel';
-import { useRef } from 'react';
-import Autoplay from 'embla-carousel-autoplay';
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
 } from '@/components/ui/card';
+import useAppStore from '@/store/app-store';
+import { ICompany, ITravel } from '@/type';
+import Autoplay from 'embla-carousel-autoplay';
+import { useRef } from 'react';
+import { Link } from 'react-router-dom';
+import WhatsAppIcon from './icons/Whatsapp';
 import { Button } from './ui/button';
+import { Carousel, CarouselContent, CarouselItem } from './ui/carousel';
 
 interface ITravelCardProps {
   travel: ITravel;
@@ -32,7 +32,7 @@ export default function TravelCard({ travel, href }: ITravelCardProps) {
   );
 
   return (
-    <Card className='overflow-hidden p-0 lg:max-w-[340px]'>
+    <Card className='overflow-hidden p-0'>
       <CardHeader className='p-0 max-h-[225px] overflow-hidden'>
         {travel.images.length > 1 ? (
           <Carousel
@@ -62,10 +62,12 @@ export default function TravelCard({ travel, href }: ITravelCardProps) {
           />
         )}
       </CardHeader>
-      <CardContent className='p-6'>
+      <CardContent className='p-6 overflow-hidden'>
         <h2 className='font-bold'>{travel.name}</h2>
         {travel.description ? (
-          <p className='opacity-70'>{travel.description}</p>
+          <p className='opacity-70 h-[150px] whitespace-pre-line truncate'>
+            {travel.description}
+          </p>
         ) : null}
       </CardContent>
       <CardFooter className='flex gap-3'>

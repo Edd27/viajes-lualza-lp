@@ -1,4 +1,5 @@
-import { type ClassValue, clsx } from 'clsx';
+import { IAddress } from '@/type';
+import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs: ClassValue[]) {
@@ -26,4 +27,11 @@ export const formatDateTime = (
   options: Intl.DateTimeFormatOptions
 ) => {
   return new Intl.DateTimeFormat(locale, options).format(date);
+};
+
+export const getFrameMapUrl = (address: IAddress, zoom: number = 16) => {
+  const addressString = `${address.street}+${address.number}+${address.suburb},+${address.city},+${address.state}`;
+  return `https://www.google.com/maps/embed/v1/place?key=${
+    import.meta.env.VITE_GOOGLE_MAPS_API_KEY
+  }&q=${addressString.replaceAll(' ', '+')}&zoom=${zoom}`;
 };
