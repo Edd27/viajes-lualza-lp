@@ -6,6 +6,7 @@ import {
 } from '@/components/ui/card';
 import useAppStore from '@/store/app-store';
 import { ICompany, ITravel } from '@/type';
+import { Cloudinary } from '@cloudinary/url-gen';
 import Autoplay from 'embla-carousel-autoplay';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
@@ -31,6 +32,12 @@ export default function TravelCard({ travel, href }: ITravelCardProps) {
     `Hola, me gustaría saber más sobre ${travel?.name}`
   );
 
+  const cld = new Cloudinary({
+    cloud: {
+      cloudName: import.meta.env.VITE_CLOUDINARY_CLOUD_NAME,
+    },
+  });
+
   return (
     <Card className='overflow-hidden p-0'>
       <CardHeader className='p-0 max-h-[225px] overflow-hidden'>
@@ -47,7 +54,7 @@ export default function TravelCard({ travel, href }: ITravelCardProps) {
                 >
                   <img
                     className='w-full h-full object-cover object-center'
-                    src={img.url}
+                    src={cld.image(img.url).createCloudinaryURL()}
                     alt={`Imagen ${img.id} de viaje ${travel.name}`}
                   />
                 </CarouselItem>

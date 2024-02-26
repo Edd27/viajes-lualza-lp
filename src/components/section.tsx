@@ -1,8 +1,9 @@
-import { useRef, type ReactNode } from 'react';
-import Autoplay from 'embla-carousel-autoplay';
 import { cn } from '@/lib/utils';
-import { Carousel, CarouselContent, CarouselItem } from './ui/carousel';
 import { ICompanyImage, ITravelImage } from '@/type';
+import { Cloudinary } from '@cloudinary/url-gen';
+import Autoplay from 'embla-carousel-autoplay';
+import { useRef, type ReactNode } from 'react';
+import { Carousel, CarouselContent, CarouselItem } from './ui/carousel';
 
 type SectionProps = {
   carouselImages?: ICompanyImage[] | ITravelImage[];
@@ -28,6 +29,12 @@ export default function Section({
   const plugin = useRef(
     Autoplay({ delay: carouselDelay, stopOnInteraction: false })
   );
+
+  const cld = new Cloudinary({
+    cloud: {
+      cloudName: import.meta.env.VITE_CLOUDINARY_CLOUD_NAME,
+    },
+  });
 
   return (
     <section
@@ -61,7 +68,7 @@ export default function Section({
                 >
                   <img
                     className='w-full h-full object-cover'
-                    src={img.url}
+                    src={cld.image(img.url).createCloudinaryURL()}
                     alt={`Hero image ${img.id}`}
                   />
                 </CarouselItem>
