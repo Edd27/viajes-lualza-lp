@@ -1,7 +1,7 @@
 import useAppStore from "@/store/app-store";
-import { ModeToggle } from "./mode-toggle";
-import { Link } from "react-router-dom";
 import { ICompany } from "@/type";
+import { Link } from "react-router-dom";
+import { ModeToggle } from "./mode-toggle";
 
 export default function Header() {
   const { company } = useAppStore() as {
@@ -12,7 +12,7 @@ export default function Header() {
 
   return (
     <header>
-      <nav className="fixed z-50 flex items-center justify-between w-full px-3 py-3 mx-auto shadow lg:px-24 bg-card dark:bg-primary">
+      <nav className="fixed z-50 flex items-center justify-between w-full px-3 py-3 mx-auto shadow lg:px-24 bg-background">
         <Link to="/">
           <img
             src={company.logo}
@@ -20,7 +20,7 @@ export default function Header() {
             className="w-10 h-10"
           />
         </Link>
-        <div className="flex items-center justify-center w-full font-bold gap-x-5 text-primary dark:text-inherit">
+        <div className="flex items-center justify-center w-full font-bold gap-x-5">
           <Link to="/">
             <span>Inicio</span>
           </Link>

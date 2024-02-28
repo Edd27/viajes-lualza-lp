@@ -46,9 +46,9 @@ export default function TravelCard({
         {travel.images.length > 0 ? (
           <Carousel
             plugins={[plugin.current]}
-            className="w-full h-full flex"
+            className="w-full"
           >
-            <CarouselContent className="h-full">
+            <CarouselContent className="h-[225px]">
               {travel.images.map((img) => (
                 <CarouselItem
                   key={img.id}
