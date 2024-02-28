@@ -43,16 +43,16 @@ export default function TravelCard({
   return (
     <Card className="overflow-hidden p-0">
       <CardHeader className="p-0 h-[225px] overflow-hidden">
-        {travel.images.length > 1 ? (
+        {travel.images.length > 0 ? (
           <Carousel
             plugins={[plugin.current]}
-            className="w-full h-full"
+            className="w-full h-full flex"
           >
-            <CarouselContent>
+            <CarouselContent className="h-full">
               {travel.images.map((img) => (
                 <CarouselItem
                   key={img.id}
-                  className="p-0 border-none w-full h-full"
+                  className="p-0 w-full h-full border-none"
                 >
                   <img
                     className="w-full h-full object-cover object-center"

@@ -52,7 +52,7 @@ export default function TravelDetail() {
         {travel.initialDate || travel.endDate ? (
           <div className="flex flex-col items-center justify-center gap-4">
             {travel.initialDate ? (
-              <p className="border border-primary text-primary bg-secondary px-2 py-1 rounded-lg w-[120px]">
+              <p className="bg-primary text-white px-2 py-1 rounded-lg w-[120px]">
                 {formatDateTime(new Date(travel.initialDate), "es-MX", { dateStyle: "medium" })}
               </p>
             ) : null}
@@ -68,10 +68,12 @@ export default function TravelDetail() {
         ) : null}
       </Section>
       <Section screenHeight={false}>
-        <article className="flex flex-col items-center gap-10">
-          <p className="text-pretty">{travel.description}</p>
+        <article className="flex flex-col items-start gap-10">
+          <p className="opacity-70 whitespace-pre-line truncate">
+            {travel.description}
+          </p>
           <Button
-            variant="outline"
+            variant="default"
             asChild
           >
             <a
