@@ -1,7 +1,7 @@
-import useAppStore from '@/store/app-store';
-import { ICompany } from '@/type';
-import MapFrame from './map-frame';
-import Section from './section';
+import useAppStore from "@/store/app-store";
+import { ICompany } from "@/type";
+import MapFrame from "./map-frame";
+import Section from "./section";
 
 export default function Contact() {
   const { company } = useAppStore() as {
@@ -11,13 +11,13 @@ export default function Contact() {
   if (!company) return null;
 
   return (
-    <Section verticalAlignment='center'>
-      <h2 className='mb-10 text-2xl lg:text-3xl lg:px-36 text-center'>
+    <Section verticalAlignment="center">
+      <h2 className="mb-10 text-2xl lg:text-3xl lg:px-36 text-center">
         Encuentranos
       </h2>
       {company.addresses.map((address) => (
         <article
-          className='overflow-hidden rounded-md w-full h-[800px]'
+          className="overflow-hidden rounded-md w-full h-[800px]"
           key={address.id}
         >
           <MapFrame

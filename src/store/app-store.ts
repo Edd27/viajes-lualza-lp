@@ -1,5 +1,5 @@
-import { ICompany } from '@/type';
-import { create } from 'zustand';
+import { ICompany } from "@/type";
+import { create } from "zustand";
 
 const useAppStore = create((set) => ({
   company: {} as ICompany,

@@ -1,7 +1,9 @@
-import { getFrameMapUrl } from '@/lib/utils';
-import { IAddress } from '@/type';
-import { MapPinned } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { getFrameMapUrl } from "@/lib/utils";
+import { IAddress } from "@/type";
+import { MapPinned } from "lucide-react";
+import {
+  useEffect, useState,
+} from "react";
 
 export default function MapFrame({
   address,
@@ -21,20 +23,20 @@ export default function MapFrame({
   }, []);
 
   return (
-    <div className='w-full h-full flex items-center justify-center relative'>
+    <div className="w-full h-full flex items-center justify-center relative">
       <div
         className={`${
-          loading ? 'scale-100' : 'scale-0'
+          loading ? "scale-100" : "scale-0"
         } transition bg-background absolute top-0 left-0 w-full h-full flex items-center justify-center`}
       >
-        <MapPinned className='animate-pulse duration-700 w-28 h-28 text-primary' />
+        <MapPinned className="animate-pulse duration-700 w-28 h-28 text-primary" />
       </div>
       <iframe
         className={`${
-          loading ? 'scale-0' : 'scale-100'
+          loading ? "scale-0" : "scale-100"
         } transition w-full h-full border-none`}
-        referrerPolicy='no-referrer-when-downgrade'
-        loading='lazy'
+        referrerPolicy="no-referrer-when-downgrade"
+        loading="lazy"
         src={getFrameMapUrl(address, zoom)}
         allowFullScreen
       />
