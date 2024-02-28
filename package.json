@@ -42,8 +42,8 @@
     "vite": "5.0.8"
   },
   "lint-staged": {
-    "*.{js,jsx,css,ts,tsx,json}": [
-      "eslint --cache --fix"
+    "*.{js,jsx,css,ts,tsx}": [
+      "npm run lint -- --fix"
     ]
   },
   "name": "viajes-lualza-lp",
