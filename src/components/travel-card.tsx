@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Card,
   CardContent,
@@ -7,16 +9,22 @@ import {
 import useAppStore from "@/store/app-store";
 import {
   ICompany, ITravel,
+  ITravelImage,
 } from "@/type";
 import { Cloudinary } from "@cloudinary/url-gen";
 import Autoplay from "embla-carousel-autoplay";
-import { useRef } from "react";
+import {
+  useRef, useState,
+} from "react";
 import { Link } from "react-router-dom";
 import WhatsAppIcon from "./icons/Whatsapp";
 import { Button } from "./ui/button";
 import {
   Carousel, CarouselContent, CarouselItem,
 } from "./ui/carousel";
+import {
+  Sheet, SheetContent, SheetTrigger,
+} from "./ui/sheet";
 
 interface ITravelCardProps {
   travel: ITravel;
@@ -26,6 +34,7 @@ interface ITravelCardProps {
 export default function TravelCard({
   travel, href,
 }: ITravelCardProps) {
+  const [image, setImage] = useState<ITravelImage | null>(null);
   const plugin = useRef(Autoplay({
     delay: 2000, stopOnInteraction: false,
   }));
@@ -44,25 +53,33 @@ export default function TravelCard({
     <Card className="overflow-hidden p-0">
       <CardHeader className="p-0 h-[225px] overflow-hidden">
         {travel.images.length > 0 ? (
-          <Carousel
-            plugins={[plugin.current]}
-            className="w-full"
-          >
-            <CarouselContent className="h-[225px]">
-              {travel.images.map((img) => (
-                <CarouselItem
-                  key={img.id}
-                  className="p-0 w-full h-full border-none"
-                >
-                  <img
-                    className="w-full h-full object-cover object-center"
-                    src={cld.image(img.url).createCloudinaryURL()}
-                    alt={`Imagen ${img.id} de viaje ${travel.name}`}
-                  />
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-          </Carousel>
+          <Sheet>
+            <Carousel
+              plugins={[plugin.current]}
+              className="w-full"
+            >
+              <CarouselContent className="h-[225px]">
+                {travel.images.map((img) => (
+                  <SheetTrigger  key={img.id} className="p-0 w-full h-full border-none" onClick={() => setImage(img)}>
+                    <CarouselItem className="p-0 w-full h-full border-none">
+                      <img
+                        className="w-full h-full object-cover object-center"
+                        src={cld.image(img.url).createCloudinaryURL()}
+                        alt={`Imagen ${img.id} de viaje ${travel.name}`}
+                      />
+                    </CarouselItem>
+                  </SheetTrigger>
+                ))}
+              </CarouselContent>
+            </Carousel>
+            <SheetContent className="h-full" side="top">
+              <img
+                className="w-full h-full object-scale-down object-center rounded-xl"
+                src={cld.image(image?.url).createCloudinaryURL()}
+                alt={`Imagen ${image?.id} del viaje ${image?.travelId}`}
+              />
+            </SheetContent>
+          </Sheet>
         ) : (
           <img
             src="https://programacion.net/files/article/20161110041116_image-not-found.png"
