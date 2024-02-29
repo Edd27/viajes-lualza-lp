@@ -45,7 +45,9 @@ export default function TravelCard({
 
   if (!company) return null;
 
-  const whatsAppMessage = encodeURIComponent(`Hola, me gustaría saber más sobre ${travel?.name}`);
+  const whatsAppPhone = company?.phones?.find((p) => p.type === "WHATSAPP")?.phone;
+
+  const whatsAppMessage = encodeURIComponent(`Hola 👋, me gustaría saber más sobre su proximo viaje a ${travel?.name}\n${window.location.protocol}//${window.location.hostname}/viajes/${travel.id}`);
 
   const cld = new Cloudinary({ cloud: { cloudName: import.meta.env.VITE_CLOUDINARY_CLOUD_NAME } });
 
@@ -103,17 +105,19 @@ export default function TravelCard({
         >
           <Link to={href}>Ver más</Link>
         </Button>
-        <Button
-          asChild
-          variant="secondary"
-        >
-          <a
-            href={`https://api.whatsapp.com/send?phone=${company?.phones?.find((p) => p.type === "WHATSAPP")}&text=${whatsAppMessage}`}
-            target="_blank"
+        {whatsAppPhone ? (
+          <Button
+            asChild
+            variant="secondary"
           >
-            <WhatsAppIcon />
-          </a>
-        </Button>
+            <a
+              href={`https://api.whatsapp.com/send?phone=${whatsAppPhone.startsWith("+52") ? whatsAppPhone : `+52${whatsAppPhone}`}&text=${whatsAppMessage}`}
+              target="_blank"
+            >
+              <WhatsAppIcon />
+            </a>
+          </Button>
+        ) : null}
       </CardFooter>
     </Card>
   );
