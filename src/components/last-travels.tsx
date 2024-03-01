@@ -15,7 +15,7 @@ export default function LastTravels() {
   return (
     <Section screenHeight={false}>
       <h2 className="font-bold text-3xl mb-20">Nuestros ultimos viajes</h2>
-      <article className="border">
+      <article>
         <div className="flex flex-wrap justify-center">
           {lastTravels.map((travel) => (
             <section key={travel.id} className="w-full md:w-1/2 lg:w-1/3 p-3">
