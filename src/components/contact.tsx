@@ -17,7 +17,7 @@ export default function Contact() {
       </h2>
       {company.addresses.map((address) => (
         <article
-          className="overflow-hidden rounded-md w-full h-[800px]"
+          className="overflow-hidden rounded-md w-full h-[400px] lg:h-[800px]"
           key={address.id}
         >
           <MapFrame
