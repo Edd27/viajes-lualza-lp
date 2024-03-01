@@ -12,7 +12,7 @@ export default function Header() {
 
   return (
     <header>
-      <nav className="fixed z-50 flex items-center justify-between w-full px-3 py-3 mx-auto shadow lg:px-24 bg-background">
+      <nav className="fixed z-50 flex items-center justify-between w-full px-3 py-3 mx-auto shadow lg:px-24 bg-primary text-white">
         <Link to="/">
           <img
             src={company.logo}
@@ -20,7 +20,7 @@ export default function Header() {
             className="w-10 h-10"
           />
         </Link>
-        <div className="flex items-center justify-center w-full font-bold gap-x-5">
+        <div className="flex items-center justify-center w-full gap-x-5">
           <Link to="/">
             <span>Inicio</span>
           </Link>

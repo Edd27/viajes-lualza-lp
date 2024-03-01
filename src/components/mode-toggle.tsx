@@ -20,7 +20,7 @@ export function ModeToggle() {
         <Button
           variant="ghost"
           size="icon"
-          className="hover:text-primary dark:hover:text-inherit hover:bg-inherit focus:ring-0 focus-visible:ring-0 focus:ring-offset-0 focus-visible:ring-offset-0"
+          className="hover:bg-inherit focus:ring-0 focus-visible:ring-0 focus:ring-offset-0 focus-visible:ring-offset-0 hover:text-inherit"
         >
           <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
           <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
