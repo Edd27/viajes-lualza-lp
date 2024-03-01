@@ -15,15 +15,18 @@ export default function LastTravels() {
   return (
     <Section screenHeight={false}>
       <h2 className="font-bold text-3xl mb-20">Nuestros ultimos viajes</h2>
-      <div className="grid gap-3 grid-cols-[repeat(auto-fill,minmax(260px,1fr))]">
-        {lastTravels.map((travel) => (
-          <TravelCard
-            travel={travel}
-            key={travel.id}
-            href={`/viajes/${travel.id}`}
-          />
-        ))}
-      </div>
+      <article className="border">
+        <div className="flex flex-wrap justify-center">
+          {lastTravels.map((travel) => (
+            <section key={travel.id} className="w-full md:w-1/2 lg:w-1/3 p-3">
+              <TravelCard
+                travel={travel}
+                href={`/viajes/${travel.id}`}
+              />
+            </section>
+          ))}
+        </div>
+      </article>
     </Section>
   );
 }
