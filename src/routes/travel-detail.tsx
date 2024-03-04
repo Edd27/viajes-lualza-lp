@@ -34,7 +34,9 @@ export default function TravelDetail() {
     );
   }
 
-  const whatsAppMessage = encodeURIComponent(`Hola, me gustaría saber más sobre ${travel.name}`);
+  const whatsAppPhone = company?.phones?.find((p) => p.type === "WHATSAPP")?.phone;
+
+  const whatsAppMessage = encodeURIComponent(`Hola 👋, me gustaría saber más sobre su proximo viaje a *${travel?.name}*\n\nEnlace:\n${window.location.protocol}//${window.location.hostname}/viajes/${travel.id}`);
 
   return (
     <Layout>
@@ -72,19 +74,21 @@ export default function TravelDetail() {
           <p className="opacity-70 whitespace-pre-line truncate">
             {travel.description}
           </p>
-          <Button
-            variant="default"
-            asChild
-          >
-            <a
-              target="_blank"
-              href={`https://api.whatsapp.com/send?phone=${company?.phones?.find((p) => p.type === "WHATSAPP")}&text=${whatsAppMessage}`}
-              className="flex items-center gap-2"
+          {whatsAppPhone ? (
+            <Button
+              variant="default"
+              asChild
             >
-              <WhatsAppIcon />
+              <a
+                target="_blank"
+                href={`https://api.whatsapp.com/send?phone=${whatsAppPhone.startsWith("+52") ? whatsAppPhone : `+52${whatsAppPhone}`}&text=${whatsAppMessage}`}
+                className="flex items-center gap-2"
+              >
+                <WhatsAppIcon />
               Solicitar informacion
-            </a>
-          </Button>
+              </a>
+            </Button>
+          ) : null}
         </article>
       </Section>
     </Layout>

@@ -47,7 +47,7 @@ export default function TravelCard({
 
   const whatsAppPhone = company?.phones?.find((p) => p.type === "WHATSAPP")?.phone;
 
-  const whatsAppMessage = encodeURIComponent(`Hola 👋, me gustaría saber más sobre su proximo viaje a ${travel?.name}\n${window.location.protocol}//${window.location.hostname}/viajes/${travel.id}`);
+  const whatsAppMessage = encodeURIComponent(`Hola 👋, me gustaría saber más sobre su proximo viaje a *${travel?.name}*\n\nEnlace:\n${window.location.protocol}//${window.location.hostname}/viajes/${travel.id}`);
 
   const cld = new Cloudinary({ cloud: { cloudName: import.meta.env.VITE_CLOUDINARY_CLOUD_NAME } });
 
