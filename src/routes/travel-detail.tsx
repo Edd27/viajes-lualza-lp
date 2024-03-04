@@ -1,6 +1,7 @@
 import WhatsAppIcon from "@/components/icons/Whatsapp";
 import Section from "@/components/section";
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import Layout from "@/layouts/layout";
 import {
   formatDateTime, heroImagesByDefault,
@@ -69,11 +70,15 @@ export default function TravelDetail() {
           </div>
         ) : null}
       </Section>
-      <Section screenHeight={false}>
-        <article className="flex flex-col items-start gap-10">
-          <p className="opacity-70 whitespace-pre-line truncate">
-            {travel.description}
-          </p>
+      <Section screenHeight={false} verticalAlignment="center">
+        <article className="flex flex-col items-start gap-10 w-full">
+          <section className="w-full space-y-4">
+            <h2 className="font-bold text-xl">Descripción</h2>
+            <Separator />
+            <p className="opacity-70 whitespace-pre-line truncate w-full lg:max-w-md">
+              {travel.description}
+            </p>
+          </section>
           {whatsAppPhone ? (
             <Button
               variant="default"
@@ -85,7 +90,7 @@ export default function TravelDetail() {
                 className="flex items-center gap-2"
               >
                 <WhatsAppIcon />
-              Solicitar informacion
+                <span>Solicitar información</span>
               </a>
             </Button>
           ) : null}
