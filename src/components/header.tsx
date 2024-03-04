@@ -12,7 +12,7 @@ export default function Header() {
 
   return (
     <header>
-      <nav className="fixed z-50 flex items-center justify-between w-full px-3 py-3 mx-auto shadow lg:px-24 bg-primary text-white">
+      <nav className="fixed z-50 flex items-center justify-between w-full px-3 py-3 mx-auto shadow lg:px-80 bg-primary text-white">
         <Link to="/">
           <img
             src={company.logo}

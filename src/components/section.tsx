@@ -50,7 +50,7 @@ export default function Section({
           relative: carouselImages.length > 0 || background,
           [`items-${horizontalAlignment}`]: horizontalAlignment,
           [`justify-${verticalAlignment}`]: verticalAlignment,
-          "py-16 px-3 lg:px-24": !carouselImages.length && !background,
+          "py-16 px-4 lg:px-80": !carouselImages.length && !background,
         },
         className,
       )}
